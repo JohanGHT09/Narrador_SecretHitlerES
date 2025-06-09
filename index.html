@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Hitler - Narración</title>
+    <style>
+        @font-face {
+            font-family: 'Truetypewriter';
+            src: url('Truetypewriter.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'Truetypewriter', monospace;
+            background-color: #f2654a;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid black;
+            margin: 10px auto;
+            max-width: 700px;
+        }
+        img {
+            max-width: 25%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        h1 {
+            display: none;
+        }
+        h2.section-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 30px 0 10px 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .audio-button {
+            font-size: 1rem;
+            padding: 15px 20px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background-color: #f2654a;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .audio-button:hover {
+            background-color: #fff;
+            color: #f2654a;
+            border-color: #000;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+        .audio-button.active {
+            background-color: #000;
+            color: #f2654a;
+            border-color: #fff;
+        }
+        .audio-button:active {
+            transform: scale(0.95);
+        }
+        .control-buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .control-button {
+            background-color: transparent;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            padding: 0;
+        }
+        .control-button img {
+            width: 70px;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .control-button:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 900px) {
+            body {
+                margin: 10px;
+                max-width: 90%;
+            }
+            img {
+                max-width: 40%;
+            }
+            h2.section-title {
+                font-size: 1.3rem;
+            }
+            .control-buttons {
+                gap: 15px;
+            }
+            .control-button img {
+                width: 60px;
+            }
+        }
+        @media (max-width: 600px) {
+            img {
+                max-width: 60%;
+            }
+            .button-container {
+                gap: 10px;
+            }
+            .audio-button {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            .control-buttons {
+                flex-direction: row;
+                gap: 10px;
+            }
+            .control-button img {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="SH.png" alt="Secret Hitler Logo" style="margin-bottom: 30px;">
+    <h1>Secret Hitler - Narración</h1>
+
+    <!-- Jugadores nuevos -->
+    <h2 class="section-title">Jugadores nuevos</h2>
+    <div class="button-container">
+        <button class="audio-button" onclick="playAudio('audio1')">5 - 6 Jugadores</button>
+        <button class="audio-button" onclick="playAudio('audio2')">7 - 8 Jugadores</button>
+        <button class="audio-button" onclick="playAudio('audio3')">9 - 10 Jugadores</button>
+    </div>
+
+    <!-- Jugadores experimentados -->
+    <h2 class="section-title">Jugadores experimentados</h2>
+    <div class="button-container">
+        <button class="audio-button" onclick="playAudio('audio4')">5 - 6 Jugadores</button>
+        <button class="audio-button" onclick="playAudio('audio5')">7 - 8 Jugadores</button>
+        <button class="audio-button" onclick="playAudio('audio6')">9 - 10 Jugadores</button>
+    </div>
+
+    <div class="control-buttons">
+        <button class="control-button" onclick="pauseAudio()">
+            <img src="Pause.png" alt="Pausa">
+        </button>
+        <button class="control-button" onclick="resumeAudio()">
+            <img src="Play.png" alt="Continuar">
+        </button>
+        <button class="control-button" onclick="stopAudio()">
+            <img src="Stop.png" alt="Detener">
+        </button>
+    </div>
+
+    <!-- Archivos de audio -->
+    <audio id="audio1" src="5-6.mp3"></audio>
+    <audio id="audio2" src="7-8.mp3"></audio>
+    <audio id="audio3" src="9-10.mp3"></audio>
+    <audio id="audio4" src="5-6_corto.mp3"></audio>
+    <audio id="audio5" src="7-8_corto.mp3"></audio>
+    <audio id="audio6" src="9-10_corto.mp3"></audio>
+
+    <footer>
+        &copy; 2024 Creado por JohanGHT
+    </footer>
+
+    <script>
+        let lastPlayedAudio = null;
+
+        function playAudio(audioId) {
+            document.querySelectorAll('.audio-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            const activeButton = document.querySelector(`.audio-button[onclick="playAudio('${audioId}')"]`);
+            if (activeButton) activeButton.classList.add('active');
+
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+
+            const audio = document.getElementById(audioId);
+            audio.play();
+            lastPlayedAudio = audio;
+        }
+
+        function pauseAudio() {
+            if (lastPlayedAudio) {
+                lastPlayedAudio.pause();
+            }
+        }
+
+        function stopAudio() {
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            lastPlayedAudio = null;
+        }
+
+        function resumeAudio() {
+            if (lastPlayedAudio && lastPlayedAudio.paused) {
+                lastPlayedAudio.play();
+            }
+        }
+    </script>
+</body>
+</html>
